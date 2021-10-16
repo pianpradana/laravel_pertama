@@ -17,34 +17,65 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/user/{id}', function ($id){
+//Otorisasi Login
 
-//     return 'User ' . $id;
+// Route::get('/login', function (){
 
-// });
+//     return 'login';
+
+// })->name('login');
+
+// Route::prefix('user')->middleware('auth')->group(function(){
 
 Route::prefix('user')->group(function(){
 
     //definisikan route
-    Route::get('/change-password', function () {
+    Route::prefix('setting1')->group(function (){
 
-        return 'change-password';
-    
+        Route::get('/change-password', function () {
+
+            return 'change-password';
+        
+        });
+        
+        Route::get('/profile', function () {
+        
+            return 'profile';
+        
+        });
+        
+        Route::get('/photo', function () {
+        
+            return 'photo';
+        
+        });
+
     });
-    
-    Route::get('/profile', function () {
-    
-    
-        return 'profile';
-    
+
+    Route::prefix('setting2')->group(function(){
+
+
+        Route::get('/change-password', function () {
+
+            return 'change-password';
+        
+        });
+        
+        Route::get('/profile', function () {
+        
+            return 'profile';
+        
+        });
+        
+        Route::get('/photo', function () {
+        
+            return 'photo';
+        
+        });
+
     });
-    
-    Route::get('/photo', function () {
-    
-    
-        return 'photo';
-    
-    });
+
+
 
 });
 
