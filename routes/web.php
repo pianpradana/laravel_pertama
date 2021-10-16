@@ -23,3 +23,10 @@ Route::get('/user', function (){
     return 'User';
 
 });
+
+Route::get('/admin', function (){
+
+
+    return 'Admin';
+
+});
