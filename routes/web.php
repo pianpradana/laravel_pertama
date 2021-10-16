@@ -17,6 +17,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route view dan redirect 
+
+// Route::view('/', 'welcome');
+// Route::redirect('/disini', '/kesana');
+
+//Redirect Halaman dan Alias
+
+Route::get('redirect', function () {
+    return redirect()->route('homepage');
+});
+
+Route::get('homepage/landing-page', function () {
+    return 'Landing'; 
+})->name('homepage');
+
+
 //Otorisasi Login
 
 // Route::get('/login', function (){
@@ -26,6 +42,8 @@ Route::get('/', function () {
 // })->name('login');
 
 // Route::prefix('user')->middleware('auth')->group(function(){
+
+// Group Routing
 
 Route::prefix('user')->group(function(){
 
@@ -74,6 +92,13 @@ Route::prefix('user')->group(function(){
         });
 
     });
+
+    //Route Resource untuk CRUD = php artisan make:controller ArticleController --resource
+    //Route List = php artisan route:list
+
+    Route::resource('/user', 'App\Http\Controllers\ArticleController');
+
+    // Route::apiResource('article', 'ApiArticleController');
 
 
 
