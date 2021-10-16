@@ -17,16 +17,35 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user', function (){
+// Route::get('/user/{id}', function ($id){
 
+//     return 'User ' . $id;
 
-    return 'User';
+// });
+
+Route::prefix('user')->group(function(){
+
+    //definisikan route
+    Route::get('/change-password', function () {
+
+        return 'change-password';
+    
+    });
+    
+    Route::get('/profile', function () {
+    
+    
+        return 'profile';
+    
+    });
+    
+    Route::get('/photo', function () {
+    
+    
+        return 'photo';
+    
+    });
 
 });
 
-Route::get('/admin', function (){
 
-
-    return 'Admin';
-
-});
