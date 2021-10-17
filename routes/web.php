@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/user/{username}', [HomeController::class, 'index'])->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/todo', [HomeController::class, 'store'])->name('todo.store');
+ 
+
 
 // Route view dan redirect 
 
@@ -27,6 +36,8 @@ Route::get('/', function () {
 Route::get('redirect', function () {
     return redirect()->route('homepage');
 });
+
+
 
 Route::get('homepage/landing-page', function () {
     return 'Landing'; 
@@ -45,7 +56,7 @@ Route::get('homepage/landing-page', function () {
 
 // Group Routing
 
-Route::prefix('user')->group(function(){
+Route::prefix('account')->group(function(){
 
     //definisikan route
     Route::prefix('setting1')->group(function (){
@@ -96,7 +107,7 @@ Route::prefix('user')->group(function(){
     //Route Resource untuk CRUD = php artisan make:controller ArticleController --resource
     //Route List = php artisan route:list
 
-    Route::resource('/user', 'App\Http\Controllers\ArticleController');
+    // Route::resource('/user', 'App\Http\Controllers\ArticleController');
 
     // Route::apiResource('article', 'ApiArticleController');
 
