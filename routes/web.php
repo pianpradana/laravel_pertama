@@ -22,7 +22,11 @@ use App\Http\Controllers\HomeController;
 // Route::get('/user/{username}', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/todo', [HomeController::class, 'store'])->name('todo.store');
+Route::get('lain', [HomeController::class, 'other'])->name('other');
+
+// Route::post('/todo', [HomeController::class, 'store'])->name('todo.store');
+Route::post('/', [HomeController::class, 'store'])->name('subscribe');
+
  
 
 
