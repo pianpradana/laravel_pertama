@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailable;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\SubscriptionFormRequest;
+// use App\Mail\UserVerificationMail;
+use App\Mail\UserActivationMail;
+
 
 //Membuat Controller php artisan make:controller NamaController
 //Membuat Controller di dalam folder php artisan NamaFolder\\NamaController
@@ -16,6 +21,13 @@ class HomeController extends Controller
     // public function index($username){
 
     public function index(){
+
+        //Kirim Surat
+        // Mail::to('pradana@laravelpertama.com')->send(new UserVerificationMail());
+
+        // Mail::to('pradana@laravelpertama.com')->send(new UserActivationMail());
+
+        return new UserActivationMail();
 
         // return view('user/index')->with([
         //     'username' => $username,
@@ -44,7 +56,7 @@ class HomeController extends Controller
 
 
 
-            return view('home');
+            // return view('home');
 
             // return redirect()->to('lain'); 
 
