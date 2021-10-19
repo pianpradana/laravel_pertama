@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Article;
 
 class ArticleController extends Controller
 {
@@ -11,9 +12,17 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    // public function index(Article $article)
+    public function index(Article $article)
+
     {
-        //
+        $articles = $article->take(10)->get();
+
+        // dd($articles);
+
+        return view('article.index', [
+            'articles' => $articles,
+        ]);
     }
 
     /**
@@ -23,7 +32,20 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        // Article::create([
+        //     'title' => 'Judul 1',
+        //     'content' => 'Konten 1'
+        // ]);
+
+
+        //Jika ada kondisi if
+        $article = new Article;
+
+        $article->title = 'Judul 2';
+        $article->content = 'Konten 2';
+
+        $article->save();
+
     }
 
     /**
@@ -66,9 +88,31 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $article = Article::findOrFail($request->id);
+
+        $article->title = 'Post 1';
+        $article->content = 'Content 1';
+
+        $article->save();
+
+        // $article->update([
+        //     'title' => 'Post satu',
+        //     'content' => 'Konten satu'
+        // ]);
+    }
+
+    public function delete(Request $request)
+    {
+        $article = Article::findOrFail($request->id);
+
+        $article->delete();
+
+        // $article->update([
+        //     'title' => 'Post satu',
+        //     'content' => 'Konten satu'
+        // ]);
     }
 
     /**
