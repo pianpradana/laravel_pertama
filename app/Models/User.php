@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Http\Controllers\ArticleController;
+
 
 class User extends Authenticatable
 {
@@ -18,7 +20,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
     ];
@@ -41,4 +43,32 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getFullName(){
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getFirstNameOrUsername(){
+        
+        if(!$this->first_name) {
+            return $this->username;
+        } 
+
+        return $this->first_name;
+    }
+
+
+    public function scopeActive($query){
+        return $query->where('activated', true);
+    }
+
+    public function scopeAgeGreaterThan($query, $age){
+        return $query->where('age', '>=', $age);
+    }
+
+    // public function getRouteKeyName(){
+
+    //     return 'username';
+    // }
+
 }

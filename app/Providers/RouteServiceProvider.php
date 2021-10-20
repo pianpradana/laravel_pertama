@@ -7,9 +7,39 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use App\Models\Article;
+
 
 class RouteServiceProvider extends ServiceProvider
 {
+
+    public function boot()
+    {
+
+        parent::boot();
+
+        Route::bind('user', function($username){
+
+           return User::where('username', $username)
+            ->where('activated', true)
+            ->first();
+        });
+
+        // $this->configureRateLimiting();
+
+        // $this->routes(function () {
+        //     Route::prefix('api')
+        //         ->middleware('api')
+        //         ->namespace($this->namespace)
+        //         ->group(base_path('routes/api.php'));
+
+        //     Route::middleware('web')
+        //         ->namespace($this->namespace)
+        //         ->group(base_path('routes/web.php'));
+        // });
+    }
+
     /**
      * The path to the "home" route for your application.
      *
@@ -33,21 +63,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        $this->configureRateLimiting();
 
-        $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
-
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
-        });
-    }
 
     /**
      * Configure the rate limiters for the application.

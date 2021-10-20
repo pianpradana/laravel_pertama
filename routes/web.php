@@ -4,9 +4,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
 use App\Models\Article;
+use App\Models\User;
+
 
 Route::get('/', [ArticleController::class, 'index']);
+Route::get('/active', [ArticleController::class, 'active']);
+Route::get('/user', [ArticleController::class, 'user']);
+Route::get('/user/{user:username}', [ArticleController::class, 'show']);
+
+Route::get('/age', [ArticleController::class, 'age']);
+
+
 Route::get('/create', [ArticleController::class, 'create']);
+Route::get('/search', [ArticleController::class, 'search']);
 Route::get('/update/{id}', [ArticleController::class, 'update']);
 Route::get('/delete/{id}', [ArticleController::class, 'delete']);
 

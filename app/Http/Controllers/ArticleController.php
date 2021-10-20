@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\User;
+
 
 class ArticleController extends Controller
 {
@@ -25,6 +27,71 @@ class ArticleController extends Controller
         ]);
     }
 
+
+    public function user()
+
+    {
+        $user = User::where('username', 'pradana')->first();
+
+        // dd($articles);
+
+        return $user->getFullName();
+        
+    }
+
+    public function show(User $user)
+
+    {
+        // $user = User::find($id);
+
+        dd($user);
+
+        
+    }
+
+    public function active()
+
+    {
+        // $user = User::where('activated', true)->get();
+
+        $user = User::active()->get();
+
+        dd($user);
+
+        // return $user->getFullName();
+        
+    }
+
+    public function age()
+
+    {
+        // $user = User::where('age', '>', '20')->get();
+        $user = User::active()->ageGreaterThan(20)->get();
+
+
+        dd($user);
+
+        // return $user->getFullName();
+        
+    }
+
+
+    public function search(Request $request)
+
+    {
+    // mencari berdasarkan boolean
+    // $article = Article::where('is_published', false)->get();
+
+    //mengurutkan data berdasarkan id dan created_at
+    //take hanya mengambil beberapa data tertentu
+    $article = Article::latest()->take(3)->get();
+
+    // $article = Article::orderBy('id', 'desc')->get();
+
+
+       dd($article);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,8 +108,8 @@ class ArticleController extends Controller
         //Jika ada kondisi if
         $article = new Article;
 
-        $article->title = 'Judul 2';
-        $article->content = 'Konten 2';
+        $article->title = 'Judul 3';
+        $article->content = 'Konten 3';
 
         $article->save();
 
@@ -65,10 +132,6 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

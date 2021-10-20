@@ -79,4 +79,9 @@ class HomeController extends Controller
 
     }
 
+    public function show($id){
+        $user = User::find($id);
+        dd($user);
+    }
+
 }
